@@ -18,8 +18,8 @@ public class Controller : MonoBehaviour
     private int roundCount = 0;
     private int state;
     private int clickedTile = -1;
-    private int clickedCop = 0;
-                    
+    public int clickedCop = 0;
+    public int[,] matriu = new int[Constants.NumTiles, Constants.NumTiles];
     void Start()
     {        
         InitTiles();
@@ -49,13 +49,36 @@ public class Controller : MonoBehaviour
     public void InitAdjacencyLists()
     {
         //Matriz de adyacencia
-        int[,] matriu = new int[Constants.NumTiles, Constants.NumTiles];
+        matriu = new int[Constants.NumTiles, Constants.NumTiles];
 
         //TODO: Inicializar matriz a 0's
 
+        for (int i = 0; i < Constants.NumTiles-1; i++)
+        {
+            for (int j = 0; j <Constants.NumTiles-1; j++)
+            {
+                matriu[i, j] = 0;
+            }
+        }
+
+
         //TODO: Para cada posición, rellenar con 1's las casillas adyacentes (arriba, abajo, izquierda y derecha)
 
+        for (int i = 0; i < Constants.NumTiles-1; i++)
+        {
+            for (int j = 0; j < Constants.NumTiles-1; j++)
+            {
+                if (System.Math.Abs(i-j) == 1 || System.Math.Abs(i - j) == 8)
+                matriu[i, j] = 1;
+            }
+        }
+
+        Debug.Log(matriu[3,5]);
+
+
         //TODO: Rellenar la lista "adjacency" de cada casilla con los índices de sus casillas adyacentes
+
+
 
     }
 
