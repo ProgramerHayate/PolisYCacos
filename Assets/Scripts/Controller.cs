@@ -68,17 +68,34 @@ public class Controller : MonoBehaviour
         {
             for (int j = 0; j < Constants.NumTiles-1; j++)
             {
-                if (System.Math.Abs(i-j) == 1 || System.Math.Abs(i - j) == 8)
-                matriu[i, j] = 1;
+
+                if (System.Math.Abs(i - j) == 1 || System.Math.Abs(i - j) == 8)
+                {
+                        matriu[i, j] = 1;
+                }
+                if (i%8 == 0  && i-j == 1)
+                {
+                    matriu[i, j] = 0;
+                }
+                if ((i+1)%8 == 0 && i-j == -1)
+                {
+                    matriu[i, j] = 0;
+                }
             }
         }
 
-        Debug.Log(matriu[3,5]);
-
-
         //TODO: Rellenar la lista "adjacency" de cada casilla con los índices de sus casillas adyacentes
 
-
+        for (int i = 0; i < Constants.NumTiles - 1; i++)
+        {
+            for (int j = 0; j < Constants.NumTiles - 1; j++)
+            {
+                if (matriu[i,j] == 1 )
+                {
+                    tiles[i].adjacency.Add(j);
+                }
+            }
+        }
 
     }
 
