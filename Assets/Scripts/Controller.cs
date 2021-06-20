@@ -262,18 +262,65 @@ public class Controller : MonoBehaviour
             if (cops[clickedCop].GetComponent<CopMove>().currentTile - 1 >= 0 && matriu[cops[clickedCop].GetComponent<CopMove>().currentTile - 1, i] == 1)
             {
                 tiles[i].selectable = true;
+
+                // comprobaciones para que no se pisen
+                if (cops[clickedCop].Equals(cops[0]) && cops[clickedCop].GetComponent<CopMove>().currentTile -1 == cops[1].GetComponent<CopMove>().currentTile)
+                {
+                    tiles[i].selectable = false;
+
+                }
+                if (cops[clickedCop].Equals(cops[1]) && cops[clickedCop].GetComponent<CopMove>().currentTile - 1 == cops[0].GetComponent<CopMove>().currentTile)
+                {
+                    tiles[i].selectable = false;
+                }
             }
             if (cops[clickedCop].GetComponent<CopMove>().currentTile + 1 >= 0 && matriu[cops[clickedCop].GetComponent<CopMove>().currentTile + 1, i] == 1)
             {
                 tiles[i].selectable = true;
+
+                // comprobaciones para que no se pisen
+                if (cops[clickedCop].Equals(cops[0]) && cops[clickedCop].GetComponent<CopMove>().currentTile + 1 == cops[1].GetComponent<CopMove>().currentTile)
+                {
+                    tiles[i].selectable = false;
+
+                }
+
+                if (cops[clickedCop].Equals(cops[1]) && cops[clickedCop].GetComponent<CopMove>().currentTile + 1 == cops[0].GetComponent<CopMove>().currentTile)
+                {
+                    tiles[i].selectable = false;
+                }
             }
             if (cops[clickedCop].GetComponent<CopMove>().currentTile - 8 >= 0 && matriu[cops[clickedCop].GetComponent<CopMove>().currentTile - 8, i] == 1)
             {
                 tiles[i].selectable = true;
+
+                // comprobaciones para que no se pisen
+                if (cops[clickedCop].Equals(cops[0]) && cops[clickedCop].GetComponent<CopMove>().currentTile - 8 == cops[1].GetComponent<CopMove>().currentTile && System.Math.Abs(cops[0].GetComponent<CopMove>().currentTile - i) > 10)
+                {
+                    tiles[i].selectable = false;
+
+                }
+
+                if (cops[clickedCop].Equals(cops[1]) && cops[clickedCop].GetComponent<CopMove>().currentTile - 8 == cops[0].GetComponent<CopMove>().currentTile && System.Math.Abs(cops[1].GetComponent<CopMove>().currentTile - i) > 10)
+                {
+                    tiles[i].selectable = false;
+                }
             }
             if (cops[clickedCop].GetComponent<CopMove>().currentTile + 8 >= 0 && matriu[cops[clickedCop].GetComponent<CopMove>().currentTile + 8, i] == 1)
             {
                 tiles[i].selectable = true;
+
+                // comprobaciones para que no se pisen
+                if (cops[clickedCop].Equals(cops[0]) && cops[clickedCop].GetComponent<CopMove>().currentTile + 8 == cops[1].GetComponent<CopMove>().currentTile && System.Math.Abs(cops[0].GetComponent<CopMove>().currentTile - i) > 10)
+                {
+                    tiles[i].selectable = false;
+
+                }
+
+                if (cops[clickedCop].Equals(cops[1]) && cops[clickedCop].GetComponent<CopMove>().currentTile + 8 == cops[0].GetComponent<CopMove>().currentTile && System.Math.Abs(cops[1].GetComponent<CopMove>().currentTile - i) > 10)
+                {
+                    tiles[i].selectable = false;
+                }
             }
 
             // comprobaciones para no cambiar de lado del tablero
@@ -301,6 +348,19 @@ public class Controller : MonoBehaviour
             {
                 tiles[i].selectable = false;
             }
+
+            // comprobaciones para que no se pisen
+            if (cops[clickedCop].Equals(cops[0]) && cops[1].GetComponent<CopMove>().currentTile == i)
+            {
+                tiles[i].selectable = false;
+                
+            }
+           
+            if (cops[clickedCop].Equals(cops[1]) && cops[0].GetComponent<CopMove>().currentTile == i)
+            {
+                tiles[i].selectable = false;
+            }
+
 
         }
 
