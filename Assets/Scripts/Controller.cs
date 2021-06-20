@@ -254,11 +254,54 @@ public class Controller : MonoBehaviour
         //Tendrás que cambiar este código por el BFS
         for(int i = 0; i < Constants.NumTiles -1; i++)
         {
-
+            // comprobaciones para saber las casillas adyacentes
             if (matriu[cops[clickedCop].GetComponent<CopMove>().currentTile, i] == 1)
             {
                 tiles[i].selectable = true;
             }
+            if (cops[clickedCop].GetComponent<CopMove>().currentTile - 1 >= 0 && matriu[cops[clickedCop].GetComponent<CopMove>().currentTile - 1, i] == 1)
+            {
+                tiles[i].selectable = true;
+            }
+            if (cops[clickedCop].GetComponent<CopMove>().currentTile + 1 >= 0 && matriu[cops[clickedCop].GetComponent<CopMove>().currentTile + 1, i] == 1)
+            {
+                tiles[i].selectable = true;
+            }
+            if (cops[clickedCop].GetComponent<CopMove>().currentTile - 8 >= 0 && matriu[cops[clickedCop].GetComponent<CopMove>().currentTile - 8, i] == 1)
+            {
+                tiles[i].selectable = true;
+            }
+            if (cops[clickedCop].GetComponent<CopMove>().currentTile + 8 >= 0 && matriu[cops[clickedCop].GetComponent<CopMove>().currentTile + 8, i] == 1)
+            {
+                tiles[i].selectable = true;
+            }
+
+            // comprobaciones para no cambiar de lado del tablero
+            if (cops[clickedCop].GetComponent<CopMove>().currentTile % 8 == 0 && cops[clickedCop].GetComponent<CopMove>().currentTile - i == -7)
+            {
+                tiles[i].selectable = false;
+            }
+            if (cops[clickedCop].GetComponent<CopMove>().currentTile % 8 == 0 && cops[clickedCop].GetComponent<CopMove>().currentTile - i == 2)
+            {
+                tiles[i].selectable = false;
+            }
+            if (cops[clickedCop].GetComponent<CopMove>().currentTile % 8 == 0 && cops[clickedCop].GetComponent<CopMove>().currentTile - i == 9)
+            {
+                tiles[i].selectable = false;
+            }
+            if ((cops[clickedCop].GetComponent<CopMove>().currentTile + 1) % 8 == 0 && cops[clickedCop].GetComponent<CopMove>().currentTile - i == 7)
+            {
+                tiles[i].selectable = false;
+            }
+            if ((cops[clickedCop].GetComponent<CopMove>().currentTile + 1) % 8 == 0 && cops[clickedCop].GetComponent<CopMove>().currentTile - i == -2)
+            {
+                tiles[i].selectable = false;
+            }
+            if ((cops[clickedCop].GetComponent<CopMove>().currentTile + 1) % 8 == 0 && cops[clickedCop].GetComponent<CopMove>().currentTile - i == -9)
+            {
+                tiles[i].selectable = false;
+            }
+
         }
 
 
