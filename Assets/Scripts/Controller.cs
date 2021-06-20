@@ -51,7 +51,7 @@ public class Controller : MonoBehaviour
         //Matriz de adyacencia
         matriu = new int[Constants.NumTiles, Constants.NumTiles];
 
-        //TODO: Inicializar matriz a 0's
+        //Inicializar matriz a 0's
 
         for (int i = 0; i < Constants.NumTiles-1; i++)
         {
@@ -62,7 +62,7 @@ public class Controller : MonoBehaviour
         }
 
 
-        //TODO: Para cada posición, rellenar con 1's las casillas adyacentes (arriba, abajo, izquierda y derecha)
+        //Para cada posición, rellenar con 1's las casillas adyacentes (arriba, abajo, izquierda y derecha)
 
         for (int i = 0; i < Constants.NumTiles-1; i++)
         {
@@ -84,7 +84,7 @@ public class Controller : MonoBehaviour
             }
         }
 
-        //TODO: Rellenar la lista "adjacency" de cada casilla con los índices de sus casillas adyacentes
+        //Rellenar la lista "adjacency" de cada casilla con los índices de sus casillas adyacentes
 
         for (int i = 0; i < Constants.NumTiles - 1; i++)
         {
@@ -180,20 +180,38 @@ public class Controller : MonoBehaviour
         tiles[clickedTile].current = true;
         FindSelectableTiles(false);
 
-        /*TODO: Cambia el código de abajo para hacer lo siguiente
+        /*Cambia el código de abajo para hacer lo siguiente
         - Elegimos una casilla aleatoria entre las seleccionables que puede ir el caco
         - Movemos al caco a esa casilla
         - Actualizamos la variable currentTile del caco a la nueva casilla
         */
-        //robber.GetComponent<RobberMove>().MoveToTile(tiles[]);
+
 
         int a = Random.Range(0, tiles[robber.GetComponent<RobberMove>().currentTile].adjacency.Count-1);
 
         robber.GetComponent<RobberMove>().MoveToTile(tiles[tiles[robber.GetComponent<RobberMove>().currentTile].adjacency[a]]);
 
         robber.GetComponent<RobberMove>().currentTile = tiles[tiles[robber.GetComponent<RobberMove>().currentTile].adjacency[a]].numTile;
+        /*
+        int max = 0;
+        int pos = 0;
+        
+        for (int i = 0;i < tiles[robber.GetComponent<RobberMove>().currentTile].adjacency.Count; i++)
+        {
+            int prox1 = System.Math.Abs(tiles[robber.GetComponent<RobberMove>().currentTile].adjacency[i] - cops[0].GetComponent<CopMove>().currentTile);
+            int prox2 = System.Math.Abs(tiles[robber.GetComponent<RobberMove>().currentTile].adjacency[i] - cops[1].GetComponent<CopMove>().currentTile);
+            int prox = prox1 + prox2;
 
-
+            
+            if (prox > max)
+            {
+                max = prox;
+                pos = i;
+            }
+        }
+        robber.GetComponent<RobberMove>().MoveToTile(tiles[tiles[robber.GetComponent<RobberMove>().currentTile].adjacency[pos]]);
+        robber.GetComponent<RobberMove>().currentTile = tiles[tiles[robber.GetComponent<RobberMove>().currentTile].adjacency[pos]].numTile;
+        */
     }
 
     public void EndGame(bool end)
@@ -250,7 +268,7 @@ public class Controller : MonoBehaviour
         //Cola para el BFS
         Queue<Tile> nodes = new Queue<Tile>();
 
-        //TODO: Implementar BFS. Los nodos seleccionables los ponemos como selectable=true
+        //Implementar BFS. Los nodos seleccionables los ponemos como selectable=true
         //Tendrás que cambiar este código por el BFS
         for(int i = 0; i < Constants.NumTiles -1; i++)
         {
@@ -259,7 +277,7 @@ public class Controller : MonoBehaviour
             {
                 tiles[i].selectable = true;
             }
-            if (cops[clickedCop].GetComponent<CopMove>().currentTile - 1 >= 0 && matriu[cops[clickedCop].GetComponent<CopMove>().currentTile - 1, i] == 1)
+            if (cops[clickedCop].GetComponent<CopMove>().currentTile - 1 >= 0 && cops[clickedCop].GetComponent<CopMove>().currentTile - 1 <= 64 &&  matriu[cops[clickedCop].GetComponent<CopMove>().currentTile - 1, i] == 1)
             {
                 tiles[i].selectable = true;
 
@@ -274,7 +292,7 @@ public class Controller : MonoBehaviour
                     tiles[i].selectable = false;
                 }
             }
-            if (cops[clickedCop].GetComponent<CopMove>().currentTile + 1 >= 0 && matriu[cops[clickedCop].GetComponent<CopMove>().currentTile + 1, i] == 1)
+            if (cops[clickedCop].GetComponent<CopMove>().currentTile + 1 >= 0 && cops[clickedCop].GetComponent<CopMove>().currentTile + 1 <= 64 && matriu[cops[clickedCop].GetComponent<CopMove>().currentTile + 1, i] == 1)
             {
                 tiles[i].selectable = true;
 
@@ -290,7 +308,7 @@ public class Controller : MonoBehaviour
                     tiles[i].selectable = false;
                 }
             }
-            if (cops[clickedCop].GetComponent<CopMove>().currentTile - 8 >= 0 && matriu[cops[clickedCop].GetComponent<CopMove>().currentTile - 8, i] == 1)
+            if (cops[clickedCop].GetComponent<CopMove>().currentTile - 8 >= 0 && cops[clickedCop].GetComponent<CopMove>().currentTile - 8 <= 64 && matriu[cops[clickedCop].GetComponent<CopMove>().currentTile - 8, i] == 1)
             {
                 tiles[i].selectable = true;
 
@@ -306,7 +324,7 @@ public class Controller : MonoBehaviour
                     tiles[i].selectable = false;
                 }
             }
-            if (cops[clickedCop].GetComponent<CopMove>().currentTile + 8 >= 0 && matriu[cops[clickedCop].GetComponent<CopMove>().currentTile + 8, i] == 1)
+            if (cops[clickedCop].GetComponent<CopMove>().currentTile + 8 >= 0 && cops[clickedCop].GetComponent<CopMove>().currentTile + 8 <= 64 && matriu[cops[clickedCop].GetComponent<CopMove>().currentTile + 8, i] == 1)
             {
                 tiles[i].selectable = true;
 
