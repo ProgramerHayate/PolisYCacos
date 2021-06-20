@@ -185,7 +185,15 @@ public class Controller : MonoBehaviour
         - Movemos al caco a esa casilla
         - Actualizamos la variable currentTile del caco a la nueva casilla
         */
-        robber.GetComponent<RobberMove>().MoveToTile(tiles[robber.GetComponent<RobberMove>().currentTile]);
+        //robber.GetComponent<RobberMove>().MoveToTile(tiles[]);
+
+        int a = Random.Range(0, tiles[robber.GetComponent<RobberMove>().currentTile].adjacency.Count-1);
+
+        robber.GetComponent<RobberMove>().MoveToTile(tiles[tiles[robber.GetComponent<RobberMove>().currentTile].adjacency[a]]);
+
+        robber.GetComponent<RobberMove>().currentTile = tiles[tiles[robber.GetComponent<RobberMove>().currentTile].adjacency[a]].numTile;
+
+
     }
 
     public void EndGame(bool end)
@@ -244,9 +252,13 @@ public class Controller : MonoBehaviour
 
         //TODO: Implementar BFS. Los nodos seleccionables los ponemos como selectable=true
         //Tendrás que cambiar este código por el BFS
-        for(int i = 0; i < Constants.NumTiles; i++)
+        for(int i = 0; i < Constants.NumTiles -1; i++)
         {
-            tiles[i].selectable = true;
+
+            if (matriu[cops[clickedCop].GetComponent<CopMove>().currentTile, i] == 1)
+            {
+                tiles[i].selectable = true;
+            }
         }
 
 
