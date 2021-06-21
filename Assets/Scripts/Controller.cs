@@ -272,6 +272,9 @@ public class Controller : MonoBehaviour
         //Tendrás que cambiar este código por el BFS
         for(int i = 0; i < Constants.NumTiles -1; i++)
         {
+            
+           
+            
             // comprobaciones para saber las casillas adyacentes
             if (matriu[cops[clickedCop].GetComponent<CopMove>().currentTile, i] == 1)
             {
@@ -378,8 +381,11 @@ public class Controller : MonoBehaviour
             {
                 tiles[i].selectable = false;
             }
-
-
+            //no moverse a la misma casilla
+            if (cops[clickedCop].GetComponent<CopMove>().currentTile.Equals(i))
+            {
+                tiles[i].selectable = false;
+            }
         }
 
 
